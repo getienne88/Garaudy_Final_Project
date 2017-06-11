@@ -1,0 +1,36 @@
+<div class="page-header">
+  <h3>Industry #<%= @industry.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Industry</dt>
+      <dd><%= @industry.industry %></dd>
+
+      <dt>Number of Companies</dt>
+      <dd><%= Company.where(industry:@industry.industry).count %></dd>
+      <dt>Number of Students</dt>
+      <dd><%= Student.where(industry: @industry.industry).count %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/industries" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/industries/<%= @industry.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_industry/<%= @industry.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
+
+<ul>
+  <% Student.where(industry: @industry.industry).each do |student| %>
+    <li><a href="/students/<%= student.id %>"><%= student.name %></a></li>
+  <% end %>
+</ul>

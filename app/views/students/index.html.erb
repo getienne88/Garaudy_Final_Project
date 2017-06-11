@@ -1,0 +1,65 @@
+<div class="page-header">
+  <h1>
+    Students
+    <a href="/students/new" class="btn btn-lg btn-success">New Student</a>
+  </h1>
+</div>
+
+<div>
+  <%= search_form_for @q do |f| %>
+    <p class="lead">Narrow results:</p>
+
+    <div class="form-group">
+      <%= f.label :name_or_company_or_function_or_industry_or_city_or_state_or_region_or_country_or_citizenship_cont, "Student containing" %>
+      <%= f.text_field :name_or_company_or_function_or_industry_or_city_or_state_or_region_or_country_or_citizenship_cont, :class => "form-control", :placeholder => "Enter a few letters" %>
+    </div>
+
+    <%= f.submit :class => "btn btn-primary btn-block" %>
+
+    <a href="/students" class="btn btn-default btn-block">Clear filters</a>
+  <% end %>
+</div>
+
+<div>
+  <h1></h1>
+</div>
+
+
+<div class="row">
+  <div class="col-md-12">
+    <table class="table table-striped table-hover">
+      <tr>
+        <th>Name</th>
+        <th>Company</th>
+        <th>Function</th>
+        <th>Industry</th>
+        <th>City</th>
+        <th>State</th>
+        <th>Region</th>
+        <th>Country</th>
+        <th>Citizenship</th>
+        <th>Actions</th>
+      </tr>
+
+      <% @students.each do |student| %>
+      <tr>
+        <!-- <td><%= student.name %></td> -->
+        <td><a href="/students/<%= student.id %>"><%= student.name %></a></td>
+        <td><%= student.company %></td>
+        <td><%= student.function %></td>
+        <td><%= student.industry %></td>
+        <td><%= student.city %></td>
+        <td><%= student.state %></td>
+        <td><%= student.region %></td>
+        <td><%= student.country %></td>
+        <td><%= student.citizenship %></td>
+        <td>
+          <a href="/students/<%= student.id %>" class="btn btn-primary">Show</a>
+          <a href="/students/<%= student.id %>/edit" class="btn btn-warning">Edit</a>
+          <a href="/delete_student/<%= student.id %>" class="btn btn-danger" rel="nofollow">Delete</a>
+        </td>
+      </tr>
+      <% end %>
+    </table>
+  </div>
+</div>

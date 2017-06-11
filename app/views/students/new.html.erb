@@ -1,0 +1,109 @@
+<!-- Validation failure messages -->
+<% if @student.errors.any? %>
+  <% @student.errors.full_messages.each do |message| %>
+    <div class="alert alert-dismissable alert-danger">
+      <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+      <%= message %>
+    </div>
+  <% end %>
+<% end %>
+
+<div class="page-header">
+  <h3>Add Student</h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12">
+    <form action="/create_student" method="post">
+      <!-- Hidden input for authenticity token to protect from forgery -->
+      <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+      <!-- Label and input for name -->
+      <div class="form-group">
+        <label for="name" class="control-label">
+          Name
+        </label>
+
+        <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @student.name %>">
+      </div>
+
+      <!-- Label and input for company -->
+      <div class="form-group">
+        <label for="company" class="control-label">
+          Company
+        </label>
+
+        <input type="text" id="company" name="company" placeholder="Company" class="form-control" value="<%= @student.company %>">
+      </div>
+
+      <!-- Label and input for function -->
+      <div class="form-group">
+        <label for="function" class="control-label">
+          Function
+        </label>
+
+        <input type="text" id="function" name="function" placeholder="Function" class="form-control" value="<%= @student.function %>">
+      </div>
+
+      <!-- Label and input for industry -->
+      <div class="form-group">
+        <label for="industry" class="control-label">
+          Industry
+        </label>
+
+        <%= select_tag(:industry, options_from_collection_for_select(Industry.all, :industry, :industry), class: "form-control") %>
+      </div>
+
+      <!-- Label and input for city -->
+      <div class="form-group">
+        <label for="city" class="control-label">
+          City
+        </label>
+
+        <input type="text" id="city" name="city" placeholder="City" class="form-control" value="<%= @student.city %>">
+      </div>
+
+      <!-- Label and input for state -->
+      <div class="form-group">
+        <label for="state" class="control-label">
+          State
+        </label>
+
+        <input type="text" id="state" name="state" placeholder="State" class="form-control" value="<%= @student.state %>">
+      </div>
+
+      <!-- Label and input for region -->
+      <div class="form-group">
+        <label for="region" class="control-label">
+          Region
+        </label>
+
+        <%= select_tag(:region, options_from_collection_for_select(Region.all, :region, :region), class: "form-control") %>
+      </div>
+
+      <!-- Label and input for country -->
+      <div class="form-group">
+        <label for="country" class="control-label">
+          Country
+        </label>
+
+        <input type="text" id="country" name="country" placeholder="Country" class="form-control" value="<%= @student.country %>">
+      </div>
+
+      <!-- Label and input for citizenship -->
+      <div class="form-group">
+        <label for="citizenship" class="control-label">
+          Citizenship
+        </label>
+
+        <input type="text" id="citizenship" name="citizenship" placeholder="Citizenship" class="form-control" value="<%= @student.citizenship %>">
+      </div>
+
+      <button class="btn btn-success">
+        Create Student
+      </button>
+      or
+      <a href="/students">Cancel</a>
+    </form>
+  </div>
+</div>

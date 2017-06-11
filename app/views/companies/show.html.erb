@@ -1,0 +1,131 @@
+<div class="page-header">
+  <h3>Company #<%= @company.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt></dt>
+      <!-- <dd><%= @company.logo %></dd> -->
+      <dd>
+        <img src="<%= @company.logo %>" height="100" width="200">
+      </dd>
+
+      <dt>Company</dt>
+      <dd><%= @company.company %></dd>
+
+      <dt>Industry</dt>
+      <dd><%= @company.industry %></dd>
+
+      <dt>Number of Students</dt>
+      <dd><%= Student.where(company: @company.company).count %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/companies" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/companies/<%= @company.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_company/<%= @company.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
+
+<ul>
+  <% Student.where(company: @company.company).each do |student| %>
+    <li><a href="/students/<%= student.id %>"><%= student.name %></a></li>
+  <% end %>
+</ul>
+
+
+
+<form action="/create_student">
+  <form action="/create_student" method="post">
+    <!-- Hidden input for authenticity token to protect from forgery -->
+    <input name="authenticity_token" type="hidden" value="<%= form_authenticity_token %>">
+
+    <!-- Label and input for name -->
+    <h3>Add Student</h3>
+
+    <div class="form-group">
+      <label for="name" class="control-label">
+        Name
+      </label>
+
+      <input type="text" id="name" name="name" placeholder="Name" class="form-control" value="<%= @student.name %>">
+    </div>
+
+    <!-- Label and input for company -->
+    <input type="hidden" id="company" name="company" placeholder="Company" class="form-control" value="<%= @company.company %>">
+
+
+    <!-- Label and input for function -->
+    <div class="form-group">
+      <label for="function" class="control-label">
+        Function
+      </label>
+
+      <input type="text" id="function" name="function" placeholder="Function" class="form-control" value="<%= @student.function %>">
+    </div>
+
+    <!-- Label and input for industry -->
+
+      <input type="hidden" id="industry" name="industry" placeholder="Industry" class="form-control" value="<%= @company.industry %>">
+
+    <!-- Label and input for city -->
+    <div class="form-group">
+      <label for="city" class="control-label">
+        City
+      </label>
+
+      <input type="text" id="city" name="city" placeholder="City" class="form-control" value="<%= @student.city %>">
+    </div>
+
+    <!-- Label and input for state -->
+    <div class="form-group">
+      <label for="state" class="control-label">
+        State
+      </label>
+
+      <input type="text" id="state" name="state" placeholder="State" class="form-control" value="<%= @student.state %>">
+    </div>
+
+    <!-- Label and input for region -->
+    <div class="form-group">
+      <label for="region" class="control-label">
+        Region
+      </label>
+
+      <%= select_tag(:region, options_from_collection_for_select(Region.all, :region, :region), class: "form-control") %>
+    </div>
+
+    <!-- Label and input for country -->
+    <div class="form-group">
+      <label for="country" class="control-label">
+        Country
+      </label>
+
+      <input type="text" id="country" name="country" placeholder="Country" class="form-control" value="<%= @student.country %>">
+    </div>
+
+    <!-- Label and input for citizenship -->
+    <div class="form-group">
+      <label for="citizenship" class="control-label">
+        Citizenship
+      </label>
+
+      <input type="text" id="citizenship" name="citizenship" placeholder="Citizenship" class="form-control" value="<%= @student.citizenship %>">
+    </div>
+
+    <button class="btn btn-success">
+      Create Student
+    </button>
+    or
+    <a href="/students">Cancel</a>
+  </form>
+</form>

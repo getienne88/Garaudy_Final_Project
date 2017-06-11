@@ -1,0 +1,67 @@
+<div class="page-header">
+  <h3>Student #<%= @student.id %></h3>
+</div>
+
+<div class="row">
+  <div class="col-md-12 mb-2">
+    <dl class="dl-horizontal">
+      <dt>Name</dt>
+      <dd><%= @student.name %></dd>
+
+      <dt>Company</dt>
+      <dd>
+        <% Company.where(company: @student.company).each do |company| %>
+        <a href="/companies/<%= company.id %>"><%= company.company %></a>
+        <% end %>
+      </dd>
+
+      <dt>Function</dt>
+      <dd><%= @student.function %></dd>
+
+      <dt>Industry</dt>
+      <dd>
+        <% Industry.where(industry: @student.industry).each do |industry| %>
+        <a href="/industries/<%= industry.id %>"><%= industry.industry %></a>
+        <% end %>
+      </dd>
+
+
+      <dt>City</dt>
+      <dd>
+        <% City.where(city: @student.city).each do |city| %>
+        <a href="/cities/<%= city.id %>"><%= city.city %></a>
+        <% end %>
+      </dd>
+
+      <dt>State</dt>
+      <dd><%= @student.state %></dd>
+
+      <dt>Region</dt>
+      <!-- <dd><%= @student.region %></dd> -->
+      <dd>
+        <% Region.where(region: @student.region).each do |region| %>
+        <a href="/regions/<%= region.id %>"><%= region.region %></a>
+        <% end %>
+      </dd>
+
+      <dt>Country</dt>
+      <dd><%= @student.country %></dd>
+
+      <dt>Citizenship</dt>
+      <dd><%= @student.citizenship %></dd>
+
+    </dl>
+
+    <div class="btn-group btn-group-justified">
+      <a href="/students" class="btn btn-primary">
+        Back
+      </a>
+      <a href="/students/<%= @student.id %>/edit" class="btn btn-warning">
+        Edit
+      </a>
+      <a href="/delete_student/<%= @student.id %>" class="btn btn-danger" rel="nofollow">
+        Delete
+      </a>
+    </div>
+  </div>
+</div>
